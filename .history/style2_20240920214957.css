@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #689999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  background-color: #2c8788;
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  color: white;
+  overflow-x: auto; /* Cho phép cuộn ngang nếu bảng vượt quá chiều rộng */
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff2222;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid white;
+  padding: 10px;
+  text-align: center;
+}
+
+thead {
+  background-color: #008b8b;
+}
+
+tbody {
+  background-color: #00baba;
+}
+
+.container table {
+  display: block;
+  width: 100%;
+  overflow-x: auto; /* Đảm bảo bảng không bị tràn ra ngoài container */
+}

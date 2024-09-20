@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clothes Form with Array</title>
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="productForm">
+        <div class="input-group">
+          <label for="fullnameCustomer">Fullname_Customer</label>
+          <input type="text" id="fullnameCustomer" required />
+        </div>
+        <div class="input-group">
+          <label for="idPro">Id_Pro</label>
+          <input type="number" id="idPro" required />
+        </div>
+        <div class="input-group">
+          <label for="namePro">Name_Pro</label>
+          <input type="text" id="namePro" required />
+        </div>
+        <div class="input-group">
+          <label for="quantityPro">Quantity_Pro</label>
+          <input type="number" id="quantityPro" required />
+        </div>
+        <div class="input-group">
+          <label for="pricePro">Price_Pro</label>
+          <input type="number" id="pricePro" required />
+        </div>
+
+        <button type="button" id="saveButton">Save</button>
+        <button type="button" id="showButton">Show</button>
+        <button type="button" id="resetButton">Reset</button>
+      </form>
+
+      <table id="productTable">
+        <thead>
+          <tr>
+            <th>Auto_Increment</th>
+            <th>Fullname_Customer</th>
+            <th>Id_Pro</th>
+            <th>Name_Pro</th>
+            <th>Quantity_Pro</th>
+            <th>Price_Pro</th>
+            <th>Discount</th>
+            <th>Amount</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Product rows will be appended here -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      let productArray = [];
+      let productCount = 0;
+
+      document.getElementById("saveButton").addEventListener("click", function () {
+        const fullnameCustomer = document.getElementById("fullnameCustomer").value;
+        const idPro = document.getElementById("idPro").value;
+        const namePro = document.getElementById("namePro").value;
+        const quantityPro = parseInt(document.getElementById("quantityPro").value);
+        const pricePro = parseInt(document.getElementById("pricePro").value);
+
+        if (!fullnameCustomer || !idPro || !namePro || !quantityPro || !pricePro) {
+          alert("Please fill out all fields");
+          return;
+        }
+
+        const discount = pricePro * 0.1; // Giảm giá 10%
+        const amount = quantityPro * pricePro;
+        const total = amount - discount;
+
+        productCount++;
+        const newProduct = {
+          id: productCount,
+          fullnameCustomer,
+          idPro,
+          namePro,
+          quantityPro,
+          pricePro,
+          discount,
+          amount,
+          total,
+        };
+
+        productArray.push(newProduct);
+        displayProducts();
+        document.getElementById("productForm").reset(); // Reset form fields
+      });
+
+      document.getElementById("showButton").addEventListener("click", function () {
+        const productTable = document.getElementById("productTable");
+        if (productTable.style.display === "none") {
+          productTable.style.display = "table";
+        } else {
+          productTable.style.display = "none";
+        }
+      });
+
+      document.getElementById("resetButton").addEventListener("click", function () {
+        document.getElementById("productForm").reset(); // Reset form fields
+      });
+
+      function displayProducts() {
+        const tableBody = document.querySelector("#productTable tbody");
+        tableBody.innerHTML = ""; // Clear table body before appending new rows
+
+        productArray.forEach((product) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+          <td>${product.id}</td>
+          <td>${product.fullnameCustomer}</td>
+          <td>${product.idPro}</td>
+          <td>${product.namePro}</td>
+          <td>${product.quantityPro}</td>
+          <td>${product.pricePro}</td>
+          <td>${product.discount.toFixed(1)}</td>
+          <td>${product.amount}</td>
+          <td>${product.total.toFixed(1)}</td>
+        `;
+          tableBody.appendChild(row);
+        });
+      }
+    </script>
+  </body>
+</html>
